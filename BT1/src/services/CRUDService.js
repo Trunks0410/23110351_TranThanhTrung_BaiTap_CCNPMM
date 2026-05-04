@@ -42,10 +42,11 @@ let hashUserPassword = (password) => {
 let getAllUser = () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let users = db.User.findAll({
-                raw: true, //hiển thị dữ liệu gốc
+            // PHẢI CÓ AWAIT
+            let users = await db.User.findAll({ 
+                raw: true,
             });
-            resolve(users); //hàm trả về kết quả
+            resolve(users); 
         } catch (e) {
             reject(e)
         }

@@ -1,23 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Danh sách người dùng</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f7f6; }
+        h2 { color: #333; text-align: center; }
+        table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #4CAF50; color: white; text-transform: uppercase; }
+        tr:hover { background-color: #f5f5f5; }
+        .btn-edit { color: #2196F3; text-decoration: none; font-weight: bold; }
+        .btn-delete { color: #f44336; text-decoration: none; font-weight: bold; }
+        .btn-edit:hover, .btn-delete:hover { text-decoration: underline; }
+    </style>
+</head>
 <body>
-    <table style="width:100%">
-        <tr>
-            <th>Email</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Address</th>
-            <th>Action</th>
-        </tr>
-        <% for(let i=0; i < datalist.length; i++) { %>
+    <table>
+        <thead>
             <tr>
-                <td><%= datalist[i].email %></td>
-                <td><%= datalist[i].firstName %></td>
-                <td><%= datalist[i].lastName %></td>
-                <td><%= datalist[i].address %></td>
-                <td>
-                    <a href="/edit-crud?id=<%= datalist[i].id %>">Edit</a> |
-                    <a href="/delete-crud?id=<%= datalist[i].id %>">Delete</a>
-                </td>
+                <th>Email</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Action</th>
             </tr>
-        <% } %>
+        </thead>
+        <tbody>
+            <% for(let i=0; i < datalist.length; i++) { %>
+                <tr>
+                    <td><%= datalist[i].email %></td>
+                    <td><%= datalist[i].firstName %></td>
+                    <td><%= datalist[i].lastName %></td>
+                    <td><%= datalist[i].address %></td>
+                    <td>
+                        <a href="/edit-crud?id=<%= datalist[i].id %>" class="btn-edit">Sửa</a> |
+                        <a href="/delete-crud?id=<%= datalist[i].id %>" class="btn-delete" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+                    </td>
+                </tr>
+            <% } %>
+        </tbody>
     </table>
 </body>
+</html>
