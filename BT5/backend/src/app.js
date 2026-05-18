@@ -1,0 +1,36 @@
+import express from "express";
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import { connectDB } from "./config/DBConfig.js";
+import "dotenv/config";
+import userRouter from "./route/userRoute.js";
+import authRouter from "./route/authRoute.js";
+import forgotPasswordRoute from "./route/forgotPasswordRoute.js";
+import productRouter from "./route/productRoute.js";
+import categoryRouter from "./route/categoryRoute.js";
+
+let app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // URL của frontend Vite mặc định
+    credentials: true,
+  }),
+);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+app.use("/user", userRouter);
+app.use("/auth", authRouter);
+app.use("/auth/forgot-password", forgotPasswordRoute);
+app.use("/api/products", productRouter);
+app.use("/api/categories", categoryRouter);
+
+connectDB();
+
+let port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log("Backend nodejs is running on the port: " + port);
+});
